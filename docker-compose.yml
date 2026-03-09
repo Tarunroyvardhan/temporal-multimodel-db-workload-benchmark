@@ -1,5 +1,3 @@
-version: "3.9"
-
 # ─────────────────────────────────────────────────────────────────────────────
 # Temporal Benchmark – Docker Compose
 # Starts: PostgreSQL 15, MongoDB 7, Neo4j 5

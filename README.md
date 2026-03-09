@@ -1,12 +1,12 @@
-# Performance Analysis of Temporal Workload on Multi-Model Databases
+# Performance Analysis of Diverse Database Systems on Temporal Workloads
 
-A benchmarking framework that evaluates **PostgreSQL**, **MongoDB**, and **Neo4j** on time-evolving recommendation workloads using the [MovieLens 1M](https://grouplens.org/datasets/movielens/1m/) dataset.
+A benchmarking framework that evaluates **PostgreSQL**, **MongoDB**, and **Neo4j** on time-evolving recommendation workloads using the [MovieLens 1M](https://grouplens.org/datasets/movielens/1m/) dataset using temporal queries.
 
 ---
 
 ## Project Goal
 
-Study how different database models behave when recommendation data grows over time and when queries are explicitly time-aware. Instead of a static snapshot, we simulate **12 monthly time steps**, appending data incrementally and measuring query performance at each step.
+Study how different database models behave when recommendation data grows over time and when queries are explicitly time-aware. Instead of a static snapshot, we simulate **12 monthly time steps**, appending data incrementally and measuring query performance at each step, using relational, document, and graph database.
 
 ---
 
@@ -41,13 +41,15 @@ Study how different database models behave when recommendation data grows over t
 │   ├── load_mongo.py         # Bulk-load data into MongoDB
 │   ├── load_neo4j.py         # Bulk-load data into Neo4j
 │   ├── check_counts.py       # Cross-validate row counts across all DBs
-│   ├── smoke_test_queries.py # Run each query once and print top result
+│   ├── test_postgres.py      # Check if data loaded successfully
+│   ├── test_mongo.py         # Check if data loaded successfully
+│   ├── test_neo4j.py         # Check if data loaded successfully
 │   ├── benchmark_temporal.py # Main benchmark driver (12 time steps × 3 DBs × 8 queries)
 │   └── analyze_results.py    # Read CSV results → plots + summary
 ├── notebooks/                # Optional Jupyter notebooks for exploration
 ├── results/
 │   └── benchmark_results.csv # Output of benchmark_temporal.py
-├── plots/                    # PNG plots produced by analyze_results.py
+├── plots/                    # Plots produced by analyze_results.py
 ├── docs/
 │   ├── temporal_queries.md   # Query definitions and rationale
 │   ├── schema_overview.md    # Schema design decisions
@@ -109,7 +111,6 @@ python scripts/prepare_data.py
 python scripts/load_postgres.py
 python scripts/load_mongo.py
 python scripts/load_neo4j.py
-python scripts/check_counts.py   # verify counts match
 ```
 
 ### 8. Run benchmark
@@ -142,8 +143,3 @@ python scripts/analyze_results.py
 
 ---
 
-## Research Questions
-
-1. How does query latency for temporal queries scale as history accumulates (months 1–12)?
-2. Where do relational, document, and graph models excel or struggle for temporal workloads?
-3. How does storage cost differ between the three models over time?
