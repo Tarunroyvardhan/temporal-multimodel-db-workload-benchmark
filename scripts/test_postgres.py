@@ -8,6 +8,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from config import PG_CONN_DICT, USERS_CSV, ITEMS_CSV, INTERACTIONS_CSV
 
 
+
 def scalar(conn, sql):
     """Return a single value from a query."""
     with conn.cursor() as cur:
